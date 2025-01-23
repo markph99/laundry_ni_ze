@@ -1,0 +1,94 @@
+<!-- src/app/laundry-landing/laundry-landing.component.html -->
+<div
+  class="
+    relative
+    min-h-screen
+    w-full
+    flex flex-col
+    items-center
+    justify-center
+    overflow-hidden
+
+    bg-gradient-to-b
+    from-sky-300
+    to-blue-600
+
+    p-4
+  "
+>
+  <!-- Floating Bubbles -->
+  <div
+    *ngFor="let b of bubbles"
+    class="
+      absolute
+      bottom-0
+      bg-white
+      bg-opacity-70
+      border border-white/80
+      rounded-full
+      pointer-events-none
+      animate-floatUp
+    "
+    [ngStyle]="{
+      'left': b.left + '%',
+      'width': b.size + 'px',
+      'height': b.size + 'px',
+      'animation-delay': b.delay + 's'
+    }"
+  ></div>
+
+  <!-- Centered Logo -->
+  <img
+    src="./laundry_logo.png"
+    alt="Laundry Ni ZE Logo"
+    class="w-40 h-auto mb-8 drop-shadow-md sm:w-48"
+  />
+
+  <!-- Button Row (responsive) -->
+  <div class="flex flex-col items-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
+    <!-- Claim Button -->
+    <button
+      (click)="onClaim()"
+      class="
+        px-8 py-3
+        rounded-full
+        font-semibold
+        text-white
+        bg-gradient-to-r from-lime-400 via-green-400 to-green-500
+        hover:from-lime-500 hover:via-green-500 hover:to-green-600
+        shadow-xl
+        transition
+        transform
+        hover:scale-105
+        focus:outline-none
+        focus:ring-4
+        focus:ring-green-300
+      "
+    >
+      Claim
+    </button>
+
+    <!-- Add Slip Button -->
+    <button
+      (click)="onAddSlip()"
+      class="
+        px-8 py-3
+        rounded-full
+        font-semibold
+        text-white
+        bg-gradient-to-r from-lime-400 via-green-400 to-green-500
+        hover:from-lime-500 hover:via-green-500 hover:to-green-600
+        shadow-xl
+        transition
+        transform
+        hover:scale-105
+        focus:outline-none
+        focus:ring-4
+        focus:ring-green-300
+      "
+    >
+      Add Slip
+    </button>
+  </div>
+
+</div>

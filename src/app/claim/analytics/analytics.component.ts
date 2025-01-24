@@ -1,9 +1,8 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import Chart from 'chart.js/auto';
 @Component({
   selector: 'app-analytics',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './analytics.component.html',
   styleUrl: './analytics.component.css'
 })

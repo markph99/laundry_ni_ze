@@ -1,0 +1,54 @@
+<div class="flex flex-col items-center p-8 gap-12">
+  <!-- Logo -->
+  <div class="flex justify-center items-center">
+    <a [routerLink]="['/']">
+      <img src="laundry_logo.png" alt="Logo" class="w-32 h-32 object-contain">
+    </a>
+  </div>
+
+  <!-- Icons Section -->
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 md:gap-12 justify-items-center">
+    <!-- Dashboard Icon -->
+    <div
+      class="flex justify-center items-center w-24 h-24 md:w-32 md:h-32 rounded-2xl bg-blue-200 text-blue-800 shadow-lg hover:scale-110 transition-transform">
+     <a [routerLink]="['/claim/dashboard']">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 md:h-16 md:w-16" fill="none" viewBox="0 0 24 24"
+      stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round"
+        d="M3 9h6V3H3v6zM9 21v-6H3v6h6zM21 3h-6v6h6V3zM21 21v-6h-6v6h6z" />
+    </svg>
+     </a>
+    </div>
+
+    <!-- Payment Icon -->
+    <div
+      class="flex justify-center items-center w-24 h-24 md:w-32 md:h-32 rounded-2xl bg-green-200 text-green-800 shadow-lg hover:scale-110 transition-transform">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 md:h-16 md:w-16" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M17 9V7a4 4 0 00-8 0v2M5 9h14a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2z" />
+      </svg>
+    </div>
+
+    <!-- History Icon -->
+    <div
+      class="flex justify-center items-center w-24 h-24 md:w-32 md:h-32 rounded-2xl bg-yellow-200 text-yellow-800 shadow-lg hover:scale-110 transition-transform">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 md:h-16 md:w-16" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3M12 4a8 8 0 100 16 8 8 0 000-16z" />
+      </svg>
+    </div>
+
+    <!-- Job Order Icon -->
+    <div
+      class="flex justify-center items-center w-24 h-24 md:w-32 md:h-32 rounded-2xl bg-purple-200 text-purple-800 shadow-lg hover:scale-110 transition-transform">
+     <a [routerLink]="['/claim/order_details']">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 md:h-16 md:w-16" fill="none" viewBox="0 0 24 24"
+      stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round"
+        d="M9 12h6m2 4H7m6-16h5a2 2 0 012 2v16a2 2 0 01-2 2H5a2 2 0 01-2-2V4a2 2 0 012-2h5m0 0V2m0 2v2" />
+    </svg>
+     </a>
+    </div>
+  </div>
+</div>

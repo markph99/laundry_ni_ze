@@ -1,0 +1,72 @@
+<div class="p-8 bg-gradient-to-b from-blue-100 to-blue-50 min-h-screen">
+  <!-- Back Button -->
+  <div class="mb-4">
+    <button
+      onclick="history.back()"
+      class="text-blue-800 hover:text-white bg-blue-100 hover:bg-blue-800 border border-blue-800 font-semibold px-4 py-2 rounded transition"
+    >
+      ← Back
+    </button>
+  </div>
+
+  <!-- Header -->
+  <div class="text-center mb-12 relative">
+    <h1 class="text-4xl font-extrabold text-blue-800">Laundry Analytics Dashboard</h1>
+    <p class="text-lg text-gray-700 mt-2">Detailed insights into your laundry business performance</p>
+  </div>
+
+  <!-- Main Content -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+    <!-- Left Side Details -->
+    <div class="bg-white rounded-xl shadow-xl p-6">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">Dashboard Details</h2>
+      <!-- Analytics Tally -->
+      <div class="mt-6">
+        <h3 class="text-lg text-center font-semibold text-blue-800">Key Metrics</h3>
+        <div class="grid grid-cols-2 gap-4 mt-4">
+          <div class="bg-blue-50 p-4 rounded-lg text-center">
+            <p class="text-2xl font-bold text-blue-800">1,245</p>
+            <p class="text-gray-600 text-sm">Total Orders</p>
+          </div>
+          <div class="bg-blue-50 p-4 rounded-lg text-center">
+            <p class="text-2xl font-bold text-blue-800">₱150,000</p>
+            <p class="text-gray-600 text-sm">Total Revenue</p>
+          </div>
+          <div class="bg-blue-50 p-4 rounded-lg text-center">
+            <p class="text-2xl font-bold text-blue-800">520</p>
+            <p class="text-gray-600 text-sm">Completed Orders</p>
+          </div>
+          <div class="bg-blue-50 p-4 rounded-lg text-center">
+            <p class="text-2xl font-bold text-blue-800">₱12,000</p>
+            <p class="text-gray-600 text-sm">Day Income</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Orders Breakdown Chart -->
+    <div class="bg-white rounded-xl shadow-xl p-6 flex flex-col items-center relative">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">Orders Breakdown</h2>
+      <div class="relative w-full">
+        <canvas id="ordersChart" class="max-w-full"></canvas>
+        <!-- Logo at the center of the chart -->
+        <div class="absolute inset-0 flex justify-center items-center pointer-events-none">
+          <img
+            src="laundry_logo.png"
+            alt="Center logo for chart"
+            class="rounded-full w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Revenue Trends Chart -->
+    <div class="bg-white rounded-xl shadow-xl p-6 flex flex-col items-center">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">Revenue Trends</h2>
+      <div class="w-full">
+        <canvas id="revenueChart" class="max-w-full"></canvas>
+      </div>
+    </div>
+  </div>
+</div>

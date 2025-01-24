@@ -1,1 +1,32 @@
-<router-outlet></router-outlet>
+<div class="
+  relative
+  min-h-screen
+  w-full
+  items-center
+  justify-center
+  overflow-hidden
+
+  bg-gradient-to-b
+  from-sky-300
+  to-blue-600
+
+  p-4
+">
+  <!-- Floating Bubbles -->
+  <div *ngFor="let b of bubbles" class="
+    absolute
+    bottom-0
+    bg-white
+    bg-opacity-70
+    border border-white/80
+    rounded-full
+    pointer-events-none
+    animate-floatUp
+  " [ngStyle]="{
+    'left': b.left + '%',
+    'width': b.size + 'px',
+    'height': b.size + 'px',
+    'animation-delay': b.delay + 's'
+  }"></div>
+  <router-outlet></router-outlet>
+</div>

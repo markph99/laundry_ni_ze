@@ -1,41 +1,4 @@
-<!-- src/app/laundry-landing/laundry-landing.component.html -->
-<div
-  class="
-    relative
-    min-h-screen
-    w-full
-    flex flex-col
-    items-center
-    justify-center
-    overflow-hidden
-
-    bg-gradient-to-b
-    from-sky-300
-    to-blue-600
-
-    p-4
-  "
->
-  <!-- Floating Bubbles -->
-  <div
-    *ngFor="let b of bubbles"
-    class="
-      absolute
-      bottom-0
-      bg-white
-      bg-opacity-70
-      border border-white/80
-      rounded-full
-      pointer-events-none
-      animate-floatUp
-    "
-    [ngStyle]="{
-      'left': b.left + '%',
-      'width': b.size + 'px',
-      'height': b.size + 'px',
-      'animation-delay': b.delay + 's'
-    }"
-  ></div>
+<div class="min-h-screen flex flex-col items-center justify-center p-4">
 
   <!-- Centered Logo -->
   <img
@@ -44,7 +7,7 @@
     class="w-40 h-auto mb-8 drop-shadow-md sm:w-48"
   />
 
-  <!-- Button Row (responsive) -->
+  <!-- Button Row (responsive, also centered) -->
   <div class="flex flex-col items-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
     <!-- Claim Button -->
     <button
@@ -87,8 +50,6 @@
         focus:ring-green-300
       "
     >
-      Add Slip
+      Job Order
     </button>
   </div>
-
-</div>

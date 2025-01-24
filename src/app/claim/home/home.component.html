@@ -1,1 +1,56 @@
-<p>home works!</p>
+<!-- Back to Homepage Button -->
+<div class="max-w-screen-md mx-auto mt-8 px-4 flex justify-start">
+  <button
+    class="bg-blue-500 text-white px-4 py-2 rounded shadow-md hover:bg-blue-600 hover:shadow-lg transition transform hover:scale-105"
+    (click)="goHome()"
+  >
+    ← Back to Homepage
+  </button>
+</div>
+
+<!-- Table Container -->
+<div class="max-w-screen-lg mx-auto my-8 px-4 bg-white shadow-md rounded-lg p-6">
+
+  <!-- Table Header -->
+  <h2 class="text-2xl font-semibold text-gray-700 mb-6 text-center">
+    Job Orders
+  </h2>
+
+  <!-- Responsive Table Wrapper -->
+  <div class="overflow-x-auto">
+    <table class="table-auto border-collapse border border-gray-300 w-full text-left text-sm sm:text-base">
+      <thead class="bg-blue-500 text-white">
+        <tr>
+          <th class="border border-gray-300 px-4 py-2 whitespace-nowrap">Slip Number</th>
+          <th class="border border-gray-300 px-4 py-2 whitespace-nowrap">Address</th>
+          <th class="border border-gray-300 px-4 py-2 whitespace-nowrap">Phone Number</th>
+          <th class="border border-gray-300 px-4 py-2 whitespace-nowrap">Service Type</th>
+          <th class="border border-gray-300 px-4 py-2 whitespace-nowrap">Pickup Date</th>
+          <th class="border border-gray-300 px-4 py-2 whitespace-nowrap">Pickup Time</th>
+          <th class="border border-gray-300 px-4 py-2 whitespace-nowrap">Bill</th>
+          <th class="border border-gray-300 px-4 py-2 whitespace-nowrap">Advance Payment</th>
+          <th class="border border-gray-300 px-4 py-2 whitespace-nowrap">Additional Instructions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let job of jobOrders"
+          class="hover:bg-gray-100 transition-colors even:bg-gray-50"
+        >
+          <td class="border border-gray-300 px-4 py-2">{{ job.slipNumber }}</td>
+          <td class="border border-gray-300 px-4 py-2">{{ job.address }}</td>
+          <td class="border border-gray-300 px-4 py-2">{{ job.phoneNumber }}</td>
+          <td class="border border-gray-300 px-4 py-2">{{ job.serviceType }}</td>
+          <td class="border border-gray-300 px-4 py-2">{{ job.pickupDate | date: 'mediumDate' }}</td>
+          <td class="border border-gray-300 px-4 py-2">{{ job.pickupTime }}</td>
+          <td class="border border-gray-300 px-4 py-2">{{ job.bill | currency: 'PHP' }}</td>
+          <td class="border border-gray-300 px-4 py-2">{{ job.advancePayment | currency: 'PHP' }}</td>
+          <td class="border border-gray-300 px-4 py-2">
+            {{ job.additionalInstructions || 'N/A' }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

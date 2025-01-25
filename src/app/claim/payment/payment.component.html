@@ -1,1 +1,49 @@
-<p>payment works!</p>
+<!-- navbar.component.html -->
+<div class="flex justify-between items-center p-4 bg-white shadow-md rounded-lg">
+  <nav class="flex space-x-4">
+    <button
+      class="px-6 py-2 text-gray-700 font-semibold hover:text-white hover:bg-blue-500 rounded-lg transition-all duration-300 flex items-center"
+      [ngClass]="{'bg-blue-500 text-white': activeTab === 'pending'}"
+      (click)="showPending(); activeTab = 'pending'">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.105 0-2 .895-2 2v4c0 1.105.895 2 2 2s2-.895 2-2v-4c0-1.105-.895-2-2-2zm0 10c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8z" />
+      </svg>
+      Pending
+    </button>
+    <button
+      class="px-6 py-2 text-gray-700 font-semibold hover:text-white hover:bg-blue-500 rounded-lg transition-all duration-300 flex items-center"
+      [ngClass]="{'bg-blue-500 text-white': activeTab === 'completed'}"
+      (click)="showCompleted(); activeTab = 'completed'">
+      Completed
+    </button>
+  </nav>
+</div>
+
+<div class="p-4">
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+    <table class="min-w-full">
+      <thead class="bg-gradient-to-r from-blue-500 to-blue-700 text-white">
+        <tr>
+          <th class="py-3 px-6 text-left font-medium">Column 1</th>
+          <th class="py-3 px-6 text-left font-medium">Column 2</th>
+          <th class="py-3 px-6 text-left font-medium">Column 3</th>
+          <th class="py-3 px-6 text-left font-medium">Column 4</th>
+          <th class="py-3 px-6 text-left font-medium">Column 5</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="data.length > 0; else noDataTemplate" class="divide-y divide-gray-200">
+        <tr *ngFor="let row of data" class="hover:bg-gray-100">
+          <td class="py-4 px-6">{{ row.column1 }}</td>
+          <td class="py-4 px-6">{{ row.column2 }}</td>
+          <td class="py-4 px-6">{{ row.column3 }}</td>
+          <td class="py-4 px-6">{{ row.column4 }}</td>
+          <td class="py-4 px-6">{{ row.column5 }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #noDataTemplate>
+      <div class="text-center text-gray-500 py-8">No data available</div>
+    </ng-template>
+  </div>
+</div>

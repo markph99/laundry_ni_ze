@@ -9,4 +9,6 @@ export interface JobOrder {
   bill: number | null;
   advancePayment: number | null;
   additionalInstructions: string;
+  createdAt: string;
+  balance?: number;
 }

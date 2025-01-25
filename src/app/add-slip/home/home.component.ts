@@ -28,8 +28,9 @@ export class HomeComponent {
     pickupDate: '',
     pickupTime: '',
     bill: null,
-    advancePayment: null, // Defaults to null
+    advancePayment: null,
     additionalInstructions: '',
+    createdAt: new Date().toISOString(),
   };
 
   submitJobOrder(): void {
@@ -62,6 +63,7 @@ export class HomeComponent {
       bill: null,
       advancePayment: null, // Reset to null
       additionalInstructions: '',
+      createdAt: new Date().toISOString(),
     };
   }
 }

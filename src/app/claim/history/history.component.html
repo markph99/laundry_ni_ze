@@ -1,0 +1,64 @@
+<div class="flex h-screen">
+  <!-- Sidebar -->
+  <aside class="w-1/4 bg-blue-600 text-white p-4 overflow-y-auto rounded-lg">
+    <h2 class="text-xl font-bold mb-4">Dates</h2>
+    <ul>
+      <li class="mb-2">
+        <button
+          class="w-full text-left p-2 rounded bg-blue-500 text-white font-bold"
+          (click)="showDetails(currentDate)"
+        >
+          Today: {{ currentDate }}
+        </button>
+      </li>
+      <li class="mb-2" *ngFor="let date of dates">
+        <button
+          class="w-full text-left p-2 rounded hover:bg-blue-500"
+          (click)="showDetails(date)"
+        >
+          {{ date }}
+        </button>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-6">
+    <header class="text-center mb-10">
+      <h1 class="text-4xl font-bold text-blue-600 mb-4">Laundry History</h1>
+      <p class="text-lg text-gray-600">
+        Select a date from the sidebar to view the job orders.
+      </p>
+    </header>
+
+    <!-- Details Section -->
+    <div *ngIf="selectedDate">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">
+        Job Orders for {{ selectedDate }}
+      </h2>
+
+      <!-- Job Orders Table -->
+      <div class="bg-white p-4 rounded-lg shadow">
+        <table class="w-full border-collapse border border-gray-300">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="border border-gray-300 p-2 text-left">Slip Number</th>
+              <th class="border border-gray-300 p-2 text-left">Address</th>
+              <th class="border border-gray-300 p-2 text-left">Status</th>
+              <th class="border border-gray-300 p-2 text-left">Created At</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of filteredJobOrders">
+              <td class="border border-gray-300 p-2">{{ order.slipNumber }}</td>
+              <td class="border border-gray-300 p-2">{{ order.address }}</td>
+              <!-- add status here  -->
+              <td class="border border-gray-300 p-2">pending</td>
+              <td class="border border-gray-300 p-2">{{ order.createdAt | date: 'short' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>

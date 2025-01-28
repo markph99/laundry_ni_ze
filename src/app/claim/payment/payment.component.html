@@ -3,150 +3,27 @@
   <aside class="w-full sm:w-1/4 bg-blue-600 text-white p-6 rounded-lg shadow-md sm:relative sm:h-screen">
     <h2 class="text-lg font-semibold mb-6">Job Orders Status</h2>
     <div class="space-y-3">
-      <button
-        class="w-full text-center p-3 rounded-lg font-bold transition-all duration-300"
-        [ngClass]="{'bg-blue-500': activeTab === 'pending'}"
-        (click)="activeTab = 'pending'; showPending()"
-      >
-        Pending
-      </button>
-      <button
-        class="w-full text-center p-3 rounded-lg font-bold transition-all duration-300"
-        [ngClass]="{'bg-blue-500': activeTab === 'paid'}"
-        (click)="activeTab = 'paid'; showPaid()"
-      >
+      <a routerLink="/payment/unpaid" routerLinkActive="bg-blue-500" class="w-full block text-center p-3 rounded-lg font-bold transition-all duration-300">
+        Unpaid
+      </a>
+      <a routerLink="/payment/paid" routerLinkActive="bg-blue-500" class="w-full block text-center p-3 rounded-lg font-bold transition-all duration-300">
         Paid
-      </button>
-      <button
-        class="w-full text-center p-3 rounded-lg font-bold transition-all duration-300"
-        [ngClass]="{'bg-blue-500': activeTab === 'completed'}"
-        (click)="activeTab = 'completed'; showCompleted()"
-      >
+      </a>
+      <a routerLink="/payment/complete" routerLinkActive="bg-blue-500" class="w-full block text-center p-3 rounded-lg font-bold transition-all duration-300">
         Completed
-      </button>
+      </a>
     </div>
   </aside>
 
   <!-- Main Content -->
   <main class="flex-1 p-6 sm:p-8">
     <div class="flex justify-between items-center mb-6">
-      <h1 class="text-3xl font-bold text-blue-700">Payment</h1>
+      <h1 class="text-3xl font-bold text-blue-700">Payment Management</h1>
       <img src="laundry_logo.png" alt="Logo" class="w-12 h-12 object-contain" />
     </div>
 
     <div class="bg-white p-6 rounded-lg shadow-md">
-      <input
-        type="text"
-        placeholder="Search job orders..."
-        class="w-72 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
-        (input)="filterTable($event)"
-      />
-      <div class="overflow-x-auto">
-        <table class="w-full mt-4 border border-gray-300 rounded-lg">
-          <thead class="bg-gray-200 text-gray-700">
-            <tr>
-              <th class="py-3 px-6 text-left">Slip Number</th>
-              <th class="py-3 px-6 text-left">Address</th>
-              <th class="py-3 px-6 text-left">Status</th>
-              <th class="py-3 px-6 text-left">Created At</th>
-              <th class="py-3 px-6 text-center">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              *ngFor="let order of pendingOrders; let i = index"
-              class="border-b border-gray-300 hover:bg-gray-100 transition"
-            >
-              <td class="py-4 px-6">SLIP {{ order.slipNumber }}</td>
-              <td class="py-4 px-6">{{ order.address }}</td>
-              <td class="py-4 px-6 text-gray-600 font-semibold">{{ order.status || 'Unpaid' }}</td>
-              <td class="py-4 px-6">{{ order.createdAt | date: 'short' }}</td>
-              <td class="py-4 px-6 text-center">
-                <button class="hover:scale-110 transition" (click)="openModal(order)">
-                  <i class="fas fa-money-bill-alt text-yellow-500 hover:text-yellow-600 fa-lg"></i>
-                </button>
-              </td>
-            </tr>
-            <!-- Empty Rows -->
-            <tr *ngFor="let i of [].constructor(8 - pendingOrders.length)">
-              <td colspan="5" class="py-4 px-6 text-center text-gray-400">-</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <router-outlet></router-outlet>
     </div>
   </main>
 </div>
-
-<!-- Modal -->
-<div *ngIf="isModalOpen" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-  <div class="bg-white p-8 rounded-lg shadow-lg w-11/12 sm:w-3/4 lg:w-1/3 max-h-[80vh] overflow-y-auto">
-    <!-- Header -->
-    <div class="flex justify-between items-center mb-6">
-      <h3 class="text-2xl font-bold text-gray-800">Payment Details</h3>
-      <button
-        (click)="closeModal()"
-        class="text-gray-500 hover:text-red-500 text-2xl focus:outline-none transition"
-      >
-        &times;
-      </button>
-    </div>
-
-    <!-- Content -->
-    <div class="space-y-6">
-      <!-- Slip Number -->
-      <div class="flex justify-between items-center">
-        <span class="font-medium text-gray-600">Slip Number:</span>
-        <span class="font-semibold text-gray-800">{{ selectedOrder?.slipNumber }}</span>
-      </div>
-
-      <!-- Bill -->
-      <div class="flex justify-between items-center">
-        <span class="font-medium text-gray-600">Bill:</span>
-        <span class="font-semibold text-gray-800">{{ selectedOrder?.bill | currency: 'PHP' }}</span>
-      </div>
-
-      <!-- Balance -->
-      <div class="flex justify-between items-center">
-        <span class="font-medium text-gray-600">Balance:</span>
-        <span class="font-semibold text-gray-800">{{ calculateBalance(selectedOrder) | currency: 'PHP' }}</span>
-      </div>
-
-      <!-- Cash Payment -->
-      <div>
-        <label for="cash-payment" class="block font-medium text-gray-600">Cash Payment</label>
-        <input
-          id="cash-payment"
-          type="number"
-          [(ngModel)]="cashPayment"
-          class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
-          placeholder="Enter cash payment"
-          (input)="updateChange()"
-        />
-      </div>
-
-      <!-- Change -->
-      <div class="flex justify-between items-center">
-        <span class="font-medium text-gray-600">Change:</span>
-        <span class="font-semibold text-gray-800">{{ change | currency: 'PHP' }}</span>
-      </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="mt-8 flex justify-between">
-      <button
-        class="px-6 py-2 bg-gray-300 rounded-lg hover:bg-gray-400 text-gray-800 font-medium transition"
-        (click)="closeModal()"
-      >
-        Cancel
-      </button>
-      <button
-        class="px-6 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 font-medium transition"
-        (click)="submitPayment()"
-      >
-        Pay
-      </button>
-    </div>
-  </div>
-</div>
-

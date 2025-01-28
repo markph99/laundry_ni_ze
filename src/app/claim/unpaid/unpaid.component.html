@@ -1,0 +1,18 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Slip Number</th>
+      <th>Address</th>
+      <th>Status</th>
+      <th>Created At</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of pendingOrders">
+      <td>{{ order.slipNumber }}</td>
+      <td>{{ order.address }}</td>
+      <td>{{ order.status }}</td>
+      <td>{{ order.createdAt | date: 'short' }}</td>
+    </tr>
+  </tbody>
+</table>

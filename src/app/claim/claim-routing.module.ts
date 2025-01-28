@@ -5,6 +5,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
 import { HistoryComponent } from './history/history.component';
 import { PaymentComponent } from './payment/payment.component';
+import { UnpaidComponent } from './unpaid/unpaid.component';
+import { PaidComponent } from './paid/paid.component';
+import { CompletedComponent } from './completed/completed.component';
 
 const routes: Routes = [
   {
@@ -25,7 +28,21 @@ const routes: Routes = [
   },
   {
     path: 'payment',
-    component: PaymentComponent
+    component: PaymentComponent,
+    children: [
+      {
+        path: 'unpaid',
+        component: UnpaidComponent
+      },
+      {
+        path: 'paid',
+        component: PaidComponent
+      },
+      {
+        path: 'complete',
+        component: CompletedComponent
+      }
+    ]
   },
 ];
 

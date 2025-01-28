@@ -7,7 +7,7 @@ import { JobOrder } from '../models/job-order';
   providedIn: 'root',
 })
 export class JobOrderService {
-  private apiUrl = 'http://localhost:3000/job_order';
+  private apiUrl = 'http://localhost:3000/api/job_order';
 
 
   constructor(private http: HttpClient) {}

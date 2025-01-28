@@ -1,11 +1,12 @@
-<div class="max-w-screen-lg mx-auto my-8 px-6 bg-gradient-to-br from-blue-100 via-white to-blue-50 text-gray-900 rounded-xl shadow-2xl">
+<div class="max-w-screen-xl mx-auto my-8 px-6 bg-white text-gray-900 rounded-xl shadow-2xl">
   <!-- Header with Back Button and Logo -->
   <div class="flex items-center justify-between mb-8">
     <!-- Back Button -->
     <button
       class="bg-gray-200 text-gray-800 px-5 py-3 rounded-lg hover:bg-gray-300 transition flex items-center shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400"
       onclick="history.back()">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+        stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
       </svg>
       Back
@@ -16,76 +17,76 @@
   </div>
 
   <!-- Table Header -->
-  <h2 class="text-4xl font-extrabold text-center mb-6" style="color: #1739c1;">Job Orders</h2>
+  <h2 class="text-2xl md:text-4xl font-extrabold text-center mb-6 text-blue-700">Job Orders</h2>
 
   <!-- Filter Input -->
   <div class="mb-4">
-    <input
-      type="text"
-      placeholder="Searching...."
-      class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
-      (input)="filterByAddress($event)"
-    />
+    <input type="text" placeholder="Search all fields..."
+      class="w-full px-4 py-2 border border-gray-400 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+      (input)="filterByQuery($event)" />
   </div>
+
+
 
   <!-- Table Wrapper -->
   <div class="overflow-x-auto rounded-lg shadow-lg">
-    <table class="table-auto border-collapse border border-gray-300 w-full text-left">
-      <thead class="bg-gradient-to-r from-blue-500 to-blue-700 text-white">
+    <!-- Table -->
+    <table *ngIf="paginatedJobOrders.length > 0" class="table-auto border border-gray-400 w-full text-left">
+      <thead class="bg-blue-600 text-white">
         <tr>
-          <th class="border border-gray-300 px-4 py-3 text-center w-16">Slip #</th>
-          <th class="border border-gray-300 px-4 py-3 w-56">Address</th>
-          <th class="border border-gray-300 px-4 py-3 w-36">Phone</th>
-          <th class="border border-gray-300 px-4 py-3 w-40">Service Type</th>
-          <th class="border border-gray-300 px-4 py-3 w-40">Pickup Date</th>
-          <th class="border border-gray-300 px-4 py-3 w-32">Pickup Time</th>
-          <th class="border border-gray-300 px-4 py-3 text-right w-28">Bill</th>
-          <th class="border border-gray-300 px-4 py-3 text-right w-36">Advance Payment</th>
-          <th class="border border-gray-300 px-4 py-3 text-right w-28">Balance</th>
-          <th class="border border-gray-300 px-4 py-3 w-64">Additional Instructions</th>
+          <th class="border border-gray-400 px-4 py-3 text-center">Slip #</th>
+          <th class="border border-gray-400 px-4 py-3">Address</th>
+          <th class="border border-gray-400 px-4 py-3">Phone</th>
+          <th class="border border-gray-400 px-4 py-3">Service Type</th>
+          <th class="border border-gray-400 px-4 py-3">Pickup Date</th>
+          <th class="border border-gray-400 px-4 py-3">Pickup Time</th>
+          <th class="border border-gray-400 px-4 py-3 text-right">Bill</th>
+          <th class="border border-gray-400 px-4 py-3 text-right">Advance Payment</th>
+          <th class="border border-gray-400 px-4 py-3 text-right">Balance</th>
+          <th class="border border-gray-400 px-4 py-3 text-right">Change</th>
+          <th class="border border-gray-400 px-4 py-3">Additional Instructions</th>
         </tr>
       </thead>
-      <tbody class="bg-gray-100 divide-y divide-gray-300">
+      <tbody class="bg-white divide-y divide-gray-300">
         <!-- Rows with Data -->
-        <tr *ngFor="let job of paginatedJobOrders" class="hover:bg-blue-50 transition">
-          <td class="border border-gray-300 px-4 py-3 text-center">{{ job.slipNumber }}</td>
-          <td class="border border-gray-300 px-4 py-3 truncate">{{ job.address }}</td>
-          <td class="border border-gray-300 px-4 py-3">{{ job.phoneNumber }}</td>
-          <td class="border border-gray-300 px-4 py-3">{{ job.serviceType }}</td>
-          <td class="border border-gray-300 px-4 py-3">{{ job.pickupDate | date: 'mediumDate' }}</td>
-          <td class="border border-gray-300 px-4 py-3">{{ job.pickupTime }}</td>
-          <td class="border border-gray-300 px-4 py-3 text-right">{{ job.bill | currency: 'PHP' }}</td>
-          <td class="border border-gray-300 px-4 py-3 text-right">{{ job.advancePayment | currency: 'PHP' }}</td>
-          <td class="border border-gray-300 px-4 py-3 text-right">{{ job.balance | currency: 'PHP' }}</td>
-          <td class="border border-gray-300 px-4 py-3">{{ job.additionalInstructions || 'N/A' }}</td>
-        </tr>
-
-        <!-- Empty Rows to Fill Table -->
-        <tr *ngFor="let i of [].constructor(8 - paginatedJobOrders.length)" class="hover:bg-blue-50 transition" [hidden]="paginatedJobOrders.length >= 8">
-          <td class="border border-gray-300 px-4 py-3 text-center">&nbsp;</td>
-          <td class="border border-gray-300 px-4 py-3">&nbsp;</td>
-          <td class="border border-gray-300 px-4 py-3">&nbsp;</td>
-          <td class="border border-gray-300 px-4 py-3">&nbsp;</td>
-          <td class="border border-gray-300 px-4 py-3">&nbsp;</td>
-          <td class="border border-gray-300 px-4 py-3">&nbsp;</td>
-          <td class="border border-gray-300 px-4 py-3">&nbsp;</td>
-          <td class="border border-gray-300 px-4 py-3">&nbsp;</td>
-          <td class="border border-gray-300 px-4 py-3">&nbsp;</td>
-          <td class="border border-gray-300 px-4 py-3">&nbsp;</td>
+        <tr *ngFor="let job of paginatedJobOrders" class="hover:bg-gray-100">
+          <td class="border border-gray-400 px-4 py-3 text-center font-medium">{{ job.slipNumber }}</td>
+          <td class="border border-gray-400 px-4 py-3 truncate">{{ job.address }}</td>
+          <td class="border border-gray-400 px-4 py-3">{{ job.phoneNumber }}</td>
+          <td class="border border-gray-400 px-4 py-3">{{ job.serviceType }}</td>
+          <td class="border border-gray-400 px-4 py-3">{{ job.pickupDate | date: 'mediumDate' }}</td>
+          <td class="border border-gray-400 px-4 py-3">{{ job.pickupTime }}</td>
+          <td class="border border-gray-400 px-4 py-3 text-right font-semibold">{{ job.bill | currency: 'PHP' }}</td>
+          <td class="border border-gray-400 px-4 py-3 text-right font-semibold">{{ job.advancePayment | currency: 'PHP'
+            }}</td>
+          <td class="border border-gray-400 px-4 py-3 text-right font-semibold">{{ job.balance | currency: 'PHP' }}</td>
+          <td class="border border-gray-400 px-4 py-3 text-right font-semibold">{{ job.change | currency: 'PHP' }}</td>
+          <td class="border border-gray-400 px-4 py-3">{{ job.additionalInstructions || 'N/A' }}</td>
         </tr>
       </tbody>
     </table>
+
+    <!-- No Results Found -->
+    <div *ngIf="paginatedJobOrders.length === 0" class="text-center py-10 text-gray-500">
+      <p class="text-lg font-semibold">No results found</p>
+      <p class="text-sm">Try adjusting your search or clearing the filter.</p>
+    </div>
   </div>
 
+
   <!-- Pagination -->
-  <div class="flex justify-end items-end mt-6 p-4">
-    <button class="bg-blue-500 text-white px-4 py-2 rounded-l-lg hover:bg-blue-600 transition focus:outline-none focus:ring-2 focus:ring-blue-400" (click)="goToPreviousPage()" [disabled]="!hasPreviousPage">
+  <div class="flex justify-center md:justify-end items-center mt-6 p-4 space-x-2">
+    <button
+      class="bg-blue-500 text-white px-4 py-2 rounded-l-lg hover:bg-blue-600 transition focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:bg-gray-300 disabled:cursor-not-allowed"
+      (click)="goToPreviousPage()" [disabled]="!hasPreviousPage">
       Previous
     </button>
-    <div class="bg-blue-100 text-blue-800 px-4 py-2">
+    <div class="bg-blue-100 text-blue-800 px-4 py-2 text-sm md:text-base">
       Page {{ currentPage }} of {{ totalPages }}
     </div>
-    <button class="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600 transition focus:outline-none focus:ring-2 focus:ring-blue-400" (click)="goToNextPage()" [disabled]="!hasNextPage">
+    <button
+      class="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600 transition focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:bg-gray-300 disabled:cursor-not-allowed"
+      (click)="goToNextPage()" [disabled]="!hasNextPage">
       Next
     </button>
   </div>

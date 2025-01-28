@@ -1,19 +1,34 @@
-<div class="flex h-screen">
+<div class="flex h-screen flex-col sm:flex-row">
   <!-- Sidebar -->
-  <aside class="w-1/4 bg-blue-600 text-white p-4 overflow-y-auto rounded-lg">
-    <h2 class="text-xl font-bold mb-4">Dates</h2>
-    <ul>
-      <li class="mb-2">
+  <aside class="w-full sm:w-1/4 bg-blue-600 text-white p-4 rounded-lg shadow-md sm:relative sm:h-screen sm:overflow-y-auto">
+    <h2 class="text-lg font-semibold mb-6">Dates</h2>
+
+    <!-- Today Button -->
+    <div class="mb-4">
+      <button class="w-full text-center p-3 rounded-lg font-bold text-white">
+        Today: {{ currentDate }}
+      </button>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="mb-4">
+      <input
+        type="text"
+        placeholder="Search dates..."
+        class="w-full px-3 py-2 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        (input)="filterDates($event)"
+      />
+    </div>
+
+    <!-- Scrollable Date List -->
+    <ul class="max-h-96 overflow-y-auto space-y-2">
+      <li *ngFor="let date of filteredDates">
         <button
-          class="w-full text-left p-2 rounded bg-blue-500 text-white font-bold"
-          (click)="showDetails(currentDate)"
-        >
-          Today: {{ currentDate }}
-        </button>
-      </li>
-      <li class="mb-2" *ngFor="let date of dates">
-        <button
-          class="w-full text-left p-2 rounded hover:bg-blue-500"
+          class="w-full text-left p-3 rounded-lg transition-all duration-300"
+          [class.bg-white]="selectedDate === date"
+          [class.text-blue-700]="selectedDate === date"
+          [class.bg-blue-600]="selectedDate !== date"
+          [class.hover:bg-blue-500]="selectedDate !== date"
           (click)="showDetails(date)"
         >
           {{ date }}
@@ -23,9 +38,13 @@
   </aside>
 
   <!-- Main Content -->
-  <main class="flex-1 p-6">
+  <main class="flex-1 p-6 sm:p-8">
     <header class="text-center mb-10">
-      <h1 class="text-4xl font-bold text-blue-600 mb-4">Laundry History</h1>
+      <!-- Logo and Title -->
+      <div class="flex justify-center items-center mb-4">
+        <img src="laundry_logo.png" alt="Laundry Logo" class="h-12 sm:h-16 mr-4" />
+        <h1 class="text-3xl sm:text-4xl font-bold text-blue-700">Laundry History</h1>
+      </div>
       <p class="text-lg text-gray-600">
         Select a date from the sidebar to view the job orders.
       </p>
@@ -37,27 +56,64 @@
         Job Orders for {{ selectedDate }}
       </h2>
 
+      <!-- Filter for Table -->
+      <div class="mb-4">
+        <input
+          type="text"
+          placeholder="Search job orders..."
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          (input)="filterTable($event)"
+        />
+      </div>
+
       <!-- Job Orders Table -->
       <div class="bg-white p-4 rounded-lg shadow">
-        <table class="w-full border-collapse border border-gray-300">
-          <thead>
-            <tr class="bg-gray-100">
-              <th class="border border-gray-300 p-2 text-left">Slip Number</th>
-              <th class="border border-gray-300 p-2 text-left">Address</th>
-              <th class="border border-gray-300 p-2 text-left">Status</th>
-              <th class="border border-gray-300 p-2 text-left">Created At</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let order of filteredJobOrders">
-              <td class="border border-gray-300 p-2">{{ order.slipNumber }}</td>
-              <td class="border border-gray-300 p-2">{{ order.address }}</td>
-              <!-- add status here  -->
-              <td class="border border-gray-300 p-2">pending</td>
-              <td class="border border-gray-300 p-2">{{ order.createdAt | date: 'short' }}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border border-gray-300">
+            <thead>
+              <tr class="bg-gray-100">
+                <th class="border border-gray-300 p-2 text-left">Slip Number</th>
+                <th class="border border-gray-300 p-2 text-left">Address</th>
+                <th class="border border-gray-300 p-2 text-left">Status</th>
+                <th class="border border-gray-300 p-2 text-left">Created At</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of paginatedOrders">
+                <td class="border border-gray-300 p-2">SLIP {{ order.slipNumber }}</td>
+                <td class="border border-gray-300 p-2">{{ order.address }}</td>
+                <td class="border border-gray-300 p-2">{{ order.status || 'Pending' }}</td>
+                <td class="border border-gray-300 p-2">{{ order.createdAt | date: 'short' }}</td>
+              </tr>
+
+              <!-- Empty Rows to Maintain 8 Rows -->
+              <tr *ngFor="let i of [].constructor(8 - paginatedOrders.length)">
+                <td colspan="4" class="border border-gray-300 p-2">&nbsp;</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex justify-end mt-4 space-x-2">
+          <button
+            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-gray-300"
+            [disabled]="currentPage === 1"
+            (click)="goToPreviousPage()"
+          >
+            Previous
+          </button>
+          <span class="px-4 py-2 bg-gray-100 text-gray-600 rounded">
+            Page {{ currentPage }} of {{ totalPages }}
+          </span>
+          <button
+            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-gray-300"
+            [disabled]="currentPage === totalPages"
+            (click)="goToNextPage()"
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   </main>

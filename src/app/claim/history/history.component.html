@@ -1,6 +1,7 @@
 <div class="flex h-screen flex-col sm:flex-row">
   <!-- Sidebar -->
-  <aside class="w-full sm:w-1/4 bg-blue-600 text-white p-4 rounded-lg shadow-md sm:relative sm:h-screen sm:overflow-y-auto">
+  <aside
+    class="w-full sm:w-1/4 bg-blue-600 text-white p-4 rounded-lg shadow-md sm:relative sm:h-screen sm:overflow-y-auto">
     <h2 class="text-lg font-semibold mb-6">Dates</h2>
 
     <!-- Today Button -->
@@ -12,25 +13,18 @@
 
     <!-- Search Bar -->
     <div class="mb-4">
-      <input
-        type="text"
-        placeholder="Search dates..."
+      <input type="text" placeholder="Search dates..."
         class="w-full px-3 py-2 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        (input)="filterDates($event)"
-      />
+        (input)="filterDates($event)" />
     </div>
 
     <!-- Scrollable Date List -->
     <ul class="max-h-96 overflow-y-auto space-y-2">
       <li *ngFor="let date of filteredDates">
-        <button
-          class="w-full text-left p-3 rounded-lg transition-all duration-300"
-          [class.bg-white]="selectedDate === date"
-          [class.text-blue-700]="selectedDate === date"
-          [class.bg-blue-600]="selectedDate !== date"
-          [class.hover:bg-blue-500]="selectedDate !== date"
-          (click)="showDetails(date)"
-        >
+        <button class="w-full text-left p-3 rounded-lg transition-all duration-300"
+          [class.bg-white]="selectedDate === date" [class.text-blue-700]="selectedDate === date"
+          [class.bg-blue-600]="selectedDate !== date" [class.hover:bg-blue-500]="selectedDate !== date"
+          (click)="showDetails(date)">
           {{ date }}
         </button>
       </li>
@@ -45,25 +39,19 @@
         <img src="laundry_logo.png" alt="Laundry Logo" class="h-12 sm:h-16 mr-4" />
         <h1 class="text-3xl sm:text-4xl font-bold text-blue-700">Laundry History</h1>
       </div>
-      <p class="text-lg text-gray-600">
-        Select a date from the sidebar to view the job orders.
-      </p>
     </header>
 
     <!-- Details Section -->
     <div *ngIf="selectedDate">
-      <h2 class="text-2xl font-bold text-gray-800 mb-4">
+      <h2 class="text-2xl text-center font-bold text-gray-800 mb-4">
         Job Orders for {{ selectedDate }}
       </h2>
 
       <!-- Filter for Table -->
       <div class="mb-4">
-        <input
-          type="text"
-          placeholder="Search job orders..."
+        <input type="text" placeholder="Search job orders..."
           class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-          (input)="filterTable($event)"
-        />
+          (input)="filterTable($event)" />
       </div>
 
       <!-- Job Orders Table -->
@@ -96,21 +84,15 @@
 
         <!-- Pagination -->
         <div class="flex justify-end mt-4 space-x-2">
-          <button
-            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-gray-300"
-            [disabled]="currentPage === 1"
-            (click)="goToPreviousPage()"
-          >
+          <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-gray-300"
+            [disabled]="currentPage === 1" (click)="goToPreviousPage()">
             Previous
           </button>
           <span class="px-4 py-2 bg-gray-100 text-gray-600 rounded">
             Page {{ currentPage }} of {{ totalPages }}
           </span>
-          <button
-            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-gray-300"
-            [disabled]="currentPage === totalPages"
-            (click)="goToNextPage()"
-          >
+          <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-gray-300"
+            [disabled]="currentPage === totalPages" (click)="goToNextPage()">
             Next
           </button>
         </div>

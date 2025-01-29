@@ -3,13 +3,28 @@
   <aside class="w-full sm:w-1/4 bg-blue-600 text-white p-6 rounded-lg shadow-md sm:relative sm:h-screen">
     <h2 class="text-lg font-semibold mb-6">Job Orders Status</h2>
     <div class="space-y-3">
-      <a routerLink="/payment/unpaid" routerLinkActive="bg-blue-500" class="w-full block text-center p-3 rounded-lg font-bold transition-all duration-300">
+      <a
+        routerLink="unpaid"
+        routerLinkActive="bg-blue-500 text-white"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="w-full block text-center p-3 rounded-lg font-bold transition-all duration-300 hover:bg-blue-400"
+      >
         Unpaid
       </a>
-      <a routerLink="/payment/paid" routerLinkActive="bg-blue-500" class="w-full block text-center p-3 rounded-lg font-bold transition-all duration-300">
+      <a
+        routerLink="paid"
+        routerLinkActive="bg-blue-500 text-white"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="w-full block text-center p-3 rounded-lg font-bold transition-all duration-300 hover:bg-blue-400"
+      >
         Paid
       </a>
-      <a routerLink="/payment/complete" routerLinkActive="bg-blue-500" class="w-full block text-center p-3 rounded-lg font-bold transition-all duration-300">
+      <a
+        routerLink="complete"
+        routerLinkActive="bg-blue-500 text-white"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="w-full block text-center p-3 rounded-lg font-bold transition-all duration-300 hover:bg-blue-400"
+      >
         Completed
       </a>
     </div>
@@ -18,10 +33,19 @@
   <!-- Main Content -->
   <main class="flex-1 p-6 sm:p-8">
     <div class="flex justify-between items-center mb-6">
+      <div>
+        <button
+          (click)="goBack()"
+          class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-all duration-300"
+        >
+          Back
+        </button>
+      </div>
       <h1 class="text-3xl font-bold text-blue-700">Payment Management</h1>
       <img src="laundry_logo.png" alt="Logo" class="w-12 h-12 object-contain" />
     </div>
 
+    <!-- Router Outlet Container -->
     <div class="bg-white p-6 rounded-lg shadow-md">
       <router-outlet></router-outlet>
     </div>

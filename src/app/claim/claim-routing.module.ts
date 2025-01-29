@@ -31,18 +31,23 @@ const routes: Routes = [
     component: PaymentComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'unpaid',
+        pathMatch: 'full',
+      },
+      {
         path: 'unpaid',
-        component: UnpaidComponent
+        component: UnpaidComponent,
       },
       {
         path: 'paid',
-        component: PaidComponent
+        component: PaidComponent,
       },
       {
         path: 'complete',
-        component: CompletedComponent
-      }
-    ]
+        component: CompletedComponent,
+      },
+    ],
   },
 ];
 

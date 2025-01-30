@@ -56,7 +56,6 @@ export class HistoryComponent implements OnInit {
     this.filteredJobOrders = this.jobOrders.filter(
       (order) =>
         (order.slipNumber && order.slipNumber.toString().includes(query)) ||
-        (order.address && order.address.toLowerCase().includes(query)) ||
         (order.status && order.status.toLowerCase().includes(query)) ||
         (order.createdAt &&
           new Date(order.createdAt).toISOString().toLowerCase().includes(query))

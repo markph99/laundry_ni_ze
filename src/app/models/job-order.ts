@@ -2,9 +2,6 @@ export interface JobOrder {
 change: string|number;
   id?: number;
   slipNumber: string;
-  address: string;
-  phoneNumber: string;
-  serviceType: string;
   clothingType: string;
   kilograms: number | null;
   pickupDate: string;

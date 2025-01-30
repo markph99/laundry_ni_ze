@@ -21,9 +21,6 @@ this.router.navigate(['/']);
 
   formData: JobOrder = {
     slipNumber: '',
-    address: '',
-    phoneNumber: '',
-    serviceType: '',
     clothingType: '',
     kilograms: null,
     pickupDate: '',
@@ -83,9 +80,6 @@ this.router.navigate(['/']);
   resetForm(): void {
     this.formData = {
       slipNumber: '',
-      address: '',
-      phoneNumber: '',
-      serviceType: '',
       clothingType: '',
       kilograms: null,
       pickupDate: '',

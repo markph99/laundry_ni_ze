@@ -33,9 +33,6 @@
       <thead class="bg-blue-600 text-white">
         <tr>
           <th class="border border-gray-400 px-4 py-3 text-center">Slip #</th>
-          <th class="border border-gray-400 px-4 py-3">Address</th>
-          <th class="border border-gray-400 px-4 py-3">Phone</th>
-          <th class="border border-gray-400 px-4 py-3">Service Type</th>
           <th class="border border-gray-400 px-4 py-3">Clothing Type</th> <!-- ✅ NEW -->
           <th class="border border-gray-400 px-4 py-3">Kilograms (kg)</th> <!-- ✅ NEW -->
           <th class="border border-gray-400 px-4 py-3">Pickup Date</th>
@@ -51,11 +48,8 @@
         <!-- Rows with Data -->
         <tr *ngFor="let job of paginatedJobOrders" class="hover:bg-gray-100">
           <td class="border border-gray-400 px-4 py-3 text-center font-medium">{{ job.slipNumber }}</td>
-          <td class="border border-gray-400 px-4 py-3 truncate">{{ job.address }}</td>
-          <td class="border border-gray-400 px-4 py-3">{{ job.phoneNumber }}</td>
-          <td class="border border-gray-400 px-4 py-3">{{ job.serviceType }}</td>
           <td class="border border-gray-400 px-4 py-3">{{ job.clothingType }}</td>
-          <td class="border border-gray-400 px-4 py-3">{{ job.kilograms }} kg</td> 
+          <td class="border border-gray-400 px-4 py-3">{{ job.kilograms }} kg</td>
           <td class="border border-gray-400 px-4 py-3">{{ job.pickupDate | date: 'mediumDate' }}</td>
           <td class="border border-gray-400 px-4 py-3">{{ job.pickupTime }}</td>
           <td class="border border-gray-400 px-4 py-3 text-right font-semibold">{{ job.bill | currency: 'PHP' }}</td>

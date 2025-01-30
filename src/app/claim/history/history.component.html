@@ -70,7 +70,6 @@
             <thead>
               <tr class="bg-gray-100">
                 <th class="border border-gray-300 p-2 text-left">Slip Number</th>
-                <th class="border border-gray-300 p-2 text-left">Address</th>
                 <th class="border border-gray-300 p-2 text-left">Status</th>
                 <th class="border border-gray-300 p-2 text-left">Created At</th>
               </tr>
@@ -78,7 +77,6 @@
             <tbody>
               <tr *ngFor="let order of paginatedOrders">
                 <td class="border border-gray-300 p-2">SLIP {{ order.slipNumber }}</td>
-                <td class="border border-gray-300 p-2">{{ order.address }}</td>
                 <td class="border border-gray-300 p-2">{{ order.status || 'Pending' }}</td>
                 <td class="border border-gray-300 p-2">{{ order.createdAt | date: 'short' }}</td>
               </tr>

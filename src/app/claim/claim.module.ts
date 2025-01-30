@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 
 import { ClaimRoutingModule } from './claim-routing.module';
 
-
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
     CommonModule,
-    ClaimRoutingModule
-  ]
+    ClaimRoutingModule,
+  ],
 })
-export class ClaimModule { }
+export class ClaimModule {}

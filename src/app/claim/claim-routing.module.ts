@@ -8,6 +8,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { UnpaidComponent } from './unpaid/unpaid.component';
 import { PaidComponent } from './paid/paid.component';
 import { CompletedComponent } from './completed/completed.component';
+import { ProductsComponent } from './products/products.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path: 'history',
     component: HistoryComponent,
+  },
+  {
+    path: 'product',
+    component: ProductsComponent,
   },
   {
     path: 'payment',

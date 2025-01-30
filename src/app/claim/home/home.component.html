@@ -26,8 +26,6 @@
       (input)="filterByQuery($event)" />
   </div>
 
-
-
   <!-- Table Wrapper -->
   <div class="overflow-x-auto rounded-lg shadow-lg">
     <!-- Table -->
@@ -38,6 +36,8 @@
           <th class="border border-gray-400 px-4 py-3">Address</th>
           <th class="border border-gray-400 px-4 py-3">Phone</th>
           <th class="border border-gray-400 px-4 py-3">Service Type</th>
+          <th class="border border-gray-400 px-4 py-3">Clothing Type</th> <!-- ✅ NEW -->
+          <th class="border border-gray-400 px-4 py-3">Kilograms (kg)</th> <!-- ✅ NEW -->
           <th class="border border-gray-400 px-4 py-3">Pickup Date</th>
           <th class="border border-gray-400 px-4 py-3">Pickup Time</th>
           <th class="border border-gray-400 px-4 py-3 text-right">Bill</th>
@@ -54,11 +54,12 @@
           <td class="border border-gray-400 px-4 py-3 truncate">{{ job.address }}</td>
           <td class="border border-gray-400 px-4 py-3">{{ job.phoneNumber }}</td>
           <td class="border border-gray-400 px-4 py-3">{{ job.serviceType }}</td>
+          <td class="border border-gray-400 px-4 py-3">{{ job.clothingType }}</td>
+          <td class="border border-gray-400 px-4 py-3">{{ job.kilograms }} kg</td> 
           <td class="border border-gray-400 px-4 py-3">{{ job.pickupDate | date: 'mediumDate' }}</td>
           <td class="border border-gray-400 px-4 py-3">{{ job.pickupTime }}</td>
           <td class="border border-gray-400 px-4 py-3 text-right font-semibold">{{ job.bill | currency: 'PHP' }}</td>
-          <td class="border border-gray-400 px-4 py-3 text-right font-semibold">{{ job.advancePayment | currency: 'PHP'
-            }}</td>
+          <td class="border border-gray-400 px-4 py-3 text-right font-semibold">{{ job.advancePayment | currency: 'PHP' }}</td>
           <td class="border border-gray-400 px-4 py-3 text-right font-semibold">{{ job.balance | currency: 'PHP' }}</td>
           <td class="border border-gray-400 px-4 py-3 text-right font-semibold">{{ job.change | currency: 'PHP' }}</td>
           <td class="border border-gray-400 px-4 py-3">{{ job.additionalInstructions || 'N/A' }}</td>
@@ -72,7 +73,6 @@
       <p class="text-sm">Try adjusting your search or clearing the filter.</p>
     </div>
   </div>
-
 
   <!-- Pagination -->
   <div class="flex justify-center md:justify-end items-center mt-6 p-4 space-x-2">

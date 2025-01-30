@@ -1,15 +1,17 @@
 export interface JobOrder {
+change: string|number;
   id?: number;
   slipNumber: string;
   address: string;
   phoneNumber: string;
   serviceType: string;
+  clothingType: string;
+  kilograms: number | null;
   pickupDate: string;
   pickupTime: string;
   bill: number | null;
   advancePayment: number | null;
-  balance?: number; // Add this property
-  change?: number; // Add this property
+  balance?: number | null;
   additionalInstructions: string;
   createdAt: string;
   formattedPickupTime?: string;

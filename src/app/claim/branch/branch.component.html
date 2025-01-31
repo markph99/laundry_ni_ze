@@ -1,0 +1,41 @@
+<h2>Register Branch & User</h2>
+
+<!-- Branch Registration Form -->
+<h3>Create New Branch</h3>
+<form (ngSubmit)="registerBranch()">
+  <label>Branch Name</label>
+  <input [(ngModel)]="newBranch.name" name="name" required />
+
+  <label>Address</label>
+  <input [(ngModel)]="newBranch.address" name="address" />
+
+  <label>Phone Number</label>
+  <input [(ngModel)]="newBranch.phoneNumber" name="phoneNumber" />
+
+  <label>Operating Hours</label>
+  <input [(ngModel)]="newBranch.operatingHours" name="operatingHours" />
+
+  <button type="submit">Create Branch</button>
+</form>
+
+<hr>
+
+<!-- User Registration Form -->
+<h3>Register New User</h3>
+<form (ngSubmit)="registerUser()">
+  <label>Username</label>
+  <input [(ngModel)]="username" name="username" required />
+
+  <label>Password</label>
+  <input [(ngModel)]="password" name="password" type="password" required />
+
+  <label>Assign to Branch</label>
+  <select [(ngModel)]="selectedBranchId" name="branchId" required>
+    <option value="" disabled>Select a branch</option>
+    <option *ngFor="let branch of branches" [value]="branch._id">
+      {{ branch.name }}
+    </option>
+  </select>
+
+  <button type="submit">Register User</button>
+</form>

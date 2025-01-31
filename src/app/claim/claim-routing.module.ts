@@ -9,31 +9,48 @@ import { UnpaidComponent } from './unpaid/unpaid.component';
 import { PaidComponent } from './paid/paid.component';
 import { CompletedComponent } from './completed/completed.component';
 import { ProductsComponent } from './products/products.component';
-
+import { BranchComponent } from './branch/branch.component';
+import { LoginComponent } from './login/login.component';
+import { adminAuthGuard } from '../guards/admin-auth.guard';
 const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
+    canActivate: [adminAuthGuard],
   },
   {
     path: 'dashboard',
     component: AnalyticsComponent,
+    canActivate: [adminAuthGuard],
+  },
+  {
+    path: 'branch',
+    component: BranchComponent,
+    canActivate: [adminAuthGuard],
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
   },
   {
     path: 'order_details',
     component: HomeComponent,
+    canActivate: [adminAuthGuard],
   },
   {
     path: 'history',
     component: HistoryComponent,
+    canActivate: [adminAuthGuard],
   },
   {
     path: 'product',
     component: ProductsComponent,
+    canActivate: [adminAuthGuard],
   },
   {
     path: 'payment',
     component: PaymentComponent,
+    canActivate: [adminAuthGuard],
     children: [
       {
         path: '',
@@ -43,14 +60,17 @@ const routes: Routes = [
       {
         path: 'unpaid',
         component: UnpaidComponent,
+        canActivate: [adminAuthGuard],
       },
       {
         path: 'paid',
         component: PaidComponent,
+        canActivate: [adminAuthGuard],
       },
       {
         path: 'complete',
         component: CompletedComponent,
+        canActivate: [adminAuthGuard],
       },
     ],
   },

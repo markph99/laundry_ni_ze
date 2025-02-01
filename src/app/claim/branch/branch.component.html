@@ -1,41 +1,82 @@
-<h2>Register Branch & User</h2>
+<div class="max-w-4xl mx-auto p-6 space-y-8">
+  <!-- Title -->
+  <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Register Branch & User</h2>
 
-<!-- Branch Registration Form -->
-<h3>Create New Branch</h3>
-<form (ngSubmit)="registerBranch()">
-  <label>Branch Name</label>
-  <input [(ngModel)]="newBranch.name" name="name" required />
+  <!-- Branch Registration Form -->
+  <div class="bg-white p-8 rounded-lg shadow-lg space-y-6">
+    <h3 class="text-2xl font-semibold text-gray-800">Create New Branch</h3>
+    <form (ngSubmit)="registerBranch()" class="space-y-4">
 
-  <label>Address</label>
-  <input [(ngModel)]="newBranch.address" name="address" />
+      <!-- Branch Name -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-2" for="branchName">Branch Name</label>
+        <input [(ngModel)]="newBranch.name" name="name" required id="branchName"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" />
+      </div>
 
-  <label>Phone Number</label>
-  <input [(ngModel)]="newBranch.phoneNumber" name="phoneNumber" />
+      <!-- Address -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-2" for="address">Address</label>
+        <input [(ngModel)]="newBranch.address" name="address" id="address"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" />
+      </div>
 
-  <label>Operating Hours</label>
-  <input [(ngModel)]="newBranch.operatingHours" name="operatingHours" />
+      <!-- Phone Number -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-2" for="phoneNumber">Phone Number</label>
+        <input [(ngModel)]="newBranch.phoneNumber" name="phoneNumber" id="phoneNumber"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" />
+      </div>
 
-  <button type="submit">Create Branch</button>
-</form>
+      <!-- Operating Hours -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-2" for="operatingHours">Operating Hours</label>
+        <input [(ngModel)]="newBranch.operatingHours" name="operatingHours" id="operatingHours"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" />
+      </div>
 
-<hr>
+      <!-- Submit Button -->
+      <button type="submit" class="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none transition duration-300">
+        Create Branch
+      </button>
+    </form>
+  </div>
 
-<!-- User Registration Form -->
-<h3>Register New User</h3>
-<form (ngSubmit)="registerUser()">
-  <label>Username</label>
-  <input [(ngModel)]="username" name="username" required />
+  <hr class="border-t border-gray-300 my-6">
 
-  <label>Password</label>
-  <input [(ngModel)]="password" name="password" type="password" required />
+  <!-- User Registration Form -->
+  <div class="bg-white p-8 rounded-lg shadow-lg space-y-6">
+    <h3 class="text-2xl font-semibold text-gray-800">Register New User</h3>
+    <form (ngSubmit)="registerUser()" class="space-y-4">
 
-  <label>Assign to Branch</label>
-  <select [(ngModel)]="selectedBranchId" name="branchId" required>
-    <option value="" disabled>Select a branch</option>
-    <option *ngFor="let branch of branches" [value]="branch._id">
-      {{ branch.name }}
-    </option>
-  </select>
+      <!-- Username -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-2" for="username">Username</label>
+        <input [(ngModel)]="username" name="username" required id="username"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" />
+      </div>
 
-  <button type="submit">Register User</button>
-</form>
+      <!-- Password -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-2" for="password">Password</label>
+        <input [(ngModel)]="password" name="password" type="password" required id="password"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300" />
+      </div>
+
+      <!-- Assign to Branch -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-2" for="branchId">Assign to Branch</label>
+        <select [(ngModel)]="selectedBranchId" name="branchId" id="branchId" required
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
+          <option value="" disabled>Select a branch</option>
+          <option *ngFor="let branch of branches" [value]="branch._id">{{ branch.name }}</option>
+        </select>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="w-full py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none transition duration-300">
+        Register User
+      </button>
+    </form>
+  </div>
+</div>

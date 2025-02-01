@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private apiUrl = 'http://localhost:3000/api/users/login';
@@ -47,6 +47,12 @@ export class AuthService {
   isAdmin(): boolean {
     const decodedToken = this.getDecodedToken();
     return decodedToken?.role === 'admin';
+  }
+
+  // 🔒 Check if user is a Branch User
+  isBranchUser(): boolean {
+    const decodedToken = this.getDecodedToken();
+    return decodedToken?.role === 'branchUser';
   }
 
   // 🛑 Logout user (Remove token)

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Branch } from '../models/branch';
 
@@ -7,34 +7,48 @@ import { Branch } from '../models/branch';
   providedIn: 'root',
 })
 export class BranchService {
-  // Point this to your Express backend route
   private apiUrl = 'http://localhost:3000/api/branches';
 
   constructor(private http: HttpClient) {}
 
+  /** Helper function to get the Authorization header with JWT token */
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('authToken'); // Get the token from localStorage
+
+    if (!token) {
+      throw new Error('No token provided');
+    }
+
+    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  }
+
+  /** Create a new branch */
   createBranch(branch: Branch): Observable<{ message: string; data: Branch }> {
-    return this.http.post<{ message: string; data: Branch }>(this.apiUrl, branch);
+    const headers = this.getAuthHeaders(); // Get headers with the token
+    return this.http.post<{ message: string; data: Branch }>(this.apiUrl, branch, { headers });
   }
 
+  /** Fetch all branches */
   getAllBranches(): Observable<{ message?: string; data: Branch[] }> {
-    // If your backend returns an object like { data: [...] }, we match that shape
-    return this.http.get<{ message?: string; data: Branch[] }>(this.apiUrl);
+    const headers = this.getAuthHeaders(); // Get headers with the token
+    return this.http.get<{ message?: string; data: Branch[] }>(this.apiUrl, { headers });
   }
 
-
+  /** Get branch by ID */
   getBranchById(id: string): Observable<{ message?: string; data: Branch }> {
-    return this.http.get<{ message?: string; data: Branch }>(`${this.apiUrl}/${id}`);
+    const headers = this.getAuthHeaders(); // Get headers with the token
+    return this.http.get<{ message?: string; data: Branch }>(`${this.apiUrl}/${id}`, { headers });
   }
 
-
+  /** Update a branch */
   updateBranch(id: string, updates: Partial<Branch>): Observable<{ message: string; data: Branch }> {
-    return this.http.patch<{ message: string; data: Branch }>(`${this.apiUrl}/${id}`, updates);
+    const headers = this.getAuthHeaders(); // Get headers with the token
+    return this.http.patch<{ message: string; data: Branch }>(`${this.apiUrl}/${id}`, updates, { headers });
   }
 
-
+  /** Delete a branch */
   deleteBranch(id: string): Observable<{ message: string }> {
-    return this.http.delete<{ message: string }>(`${this.apiUrl}/${id}`);
+    const headers = this.getAuthHeaders(); // Get headers with the token
+    return this.http.delete<{ message: string }>(`${this.apiUrl}/${id}`, { headers });
   }
 }
-
-

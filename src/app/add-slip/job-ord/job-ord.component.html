@@ -1,4 +1,4 @@
-<div class="max-w-7xl mx-auto p-4 md:p-8">
+<div class="max-w-7xl mx-auto p-4 md:p-6 lg:p-8">
   <!-- Header with Logo and Title -->
   <div class="flex items-center justify-center mb-8 text-center">
     <button (click)="goBack()" class="focus:outline-none">
@@ -7,68 +7,121 @@
     <h1 class="text-3xl md:text-4xl font-extrabold text-gray-800">Job Order</h1>
   </div>
 
+  <!-- Main Content Grid -->
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-    <!-- Left Container -->
-    <div class="bg-gradient-to-r from-white to-gray-100 shadow-xl rounded-3xl p-6 md:p-10 border h-full flex flex-col justify-between">
-      <div>
-        <table class="w-full border-collapse rounded-lg overflow-hidden text-base md:text-lg">
-          <thead class="bg-blue-500 text-white">
-            <tr>
-              <th class="p-4">Description</th>
-              <th class="p-4">Kilogram</th>
-              <th class="p-4">Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="even:bg-gray-100">
-              <td class="p-4">Product A</td>
-              <td class="p-4">2.5</td>
-              <td class="p-4">$45.00</td>
-            </tr>
-            <tr class="even:bg-gray-100">
-              <td class="p-4">Product B</td>
-              <td class="p-4">3.0</td>
-              <td class="p-4">$55.00</td>
-            </tr>
-            <tr class="even:bg-gray-100">
-              <td class="p-4">Product C</td>
-              <td class="p-4">1.5</td>
-              <td class="p-4">$30.00</td>
-            </tr>
-            <tr class="even:bg-gray-100">
-              <td class="p-4">Product D</td>
-              <td class="p-4">4.0</td>
-              <td class="p-4">$70.00</td>
-            </tr>
-            <tr class="even:bg-gray-100">
-              <td class="p-4">Product E</td>
-              <td class="p-4">5.0</td>
-              <td class="p-4">$90.00</td>
-            </tr>
-            <tr class="bg-blue-100 font-semibold">
-              <td class="p-4" colspan="2">Total Amount</td>
-              <td class="p-4">$290.00</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <button class="mt-6 p-4 w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white text-lg font-bold rounded-xl shadow-lg hover:from-blue-600 hover:to-indigo-600 transition-all">Job Order</button>
+
+    <!-- Left Container (Order Details Table) -->
+    <div class="bg-gradient-to-r from-white to-gray-100 shadow-xl rounded-3xl p-4 md:p-6 lg:p-8 border h-full flex flex-col">
+      <table class="w-full border-collapse rounded-lg overflow-hidden text-sm md:text-base lg:text-lg">
+        <thead class="bg-blue-500 text-white">
+          <tr>
+            <th class="p-2 md:p-4 w-1/3 border-b border-gray-300">Description</th>
+            <th class="p-2 md:p-4 w-1/3 border-b border-gray-300">Unit</th>
+            <th class="p-2 md:p-4 w-1/3 border-b border-gray-300">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of addedProducts; let i = index" class="even:bg-gray-100">
+            <td class="p-2 md:p-4 w-1/3 border-b border-gray-200">{{ product.productName }}</td>
+            <td class="p-2 md:p-4 w-1/3 border-b border-gray-200">{{ product.quantity }}</td>
+            <td class="p-2 md:p-4 w-1/3 border-b border-gray-200">{{ product.totalPrice | currency: 'PHP' }}</td>
+          </tr>
+          <tr *ngFor="let empty of createEmptyRows(addedProducts.length, 8)" class="h-12">
+            <td class="p-2 md:p-4 w-1/3">&nbsp;</td>
+            <td class="p-2 md:p-4 w-1/3">&nbsp;</td>
+            <td class="p-2 md:p-4 w-1/3">&nbsp;</td>
+          </tr>
+          <tr class="bg-blue-100 font-semibold">
+            <td class="p-2 md:p-4 text-lg md:text-2xl" colspan="2">Total Amount</td>
+            <td class="p-2 md:p-4 text-xl md:text-4xl font-extrabold text-blue-600">{{ getTotalAmount() | currency: 'PHP' }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <button (click)="submitJobOrder()" class="mt-4 md:mt-6 p-3 md:p-4 w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white text-base md:text-lg font-bold rounded-xl shadow-lg hover:from-blue-600 hover:to-indigo-600 transition-all">Submit Job Order</button>
     </div>
 
-    <!-- Right Container -->
-    <div class="bg-gradient-to-r from-white to-gray-100 shadow-xl rounded-3xl p-6 md:p-10 border h-full flex flex-col justify-between">
-      <button class="p-4 w-full text-center text-lg font-bold mb-6 bg-gradient-to-r from-gray-200 to-gray-300 text-gray-800 rounded-lg shadow hover:from-gray-300 hover:to-gray-400 transition-all">Product List</button>
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
-        <button class="p-4 md:p-6 bg-white border rounded-xl shadow hover:bg-gray-100 text-lg font-medium transition-all">Product 1</button>
-        <button class="p-4 md:p-6 bg-white border rounded-xl shadow hover:bg-gray-100 text-lg font-medium transition-all">Product 2</button>
-        <button class="p-4 md:p-6 bg-white border rounded-xl shadow hover:bg-gray-100 text-lg font-medium transition-all">Product 3</button>
-        <button class="p-4 md:p-6 bg-white border rounded-xl shadow hover:bg-gray-100 text-lg font-medium transition-all">Product 4</button>
-        <button class="p-4 md:p-6 bg-white border rounded-xl shadow hover:bg-gray-100 text-lg font-medium transition-all">Product 5</button>
-        <button class="p-4 md:p-6 bg-white border rounded-xl shadow hover:bg-gray-100 text-lg font-medium transition-all">Product 6</button>
-        <button class="p-4 md:p-6 bg-white border rounded-xl shadow hover:bg-gray-100 text-lg font-medium transition-all">Product 7</button>
-        <button class="p-4 md:p-6 bg-white border rounded-xl shadow hover:bg-gray-100 text-lg font-medium transition-all">Product 8</button>
-        <button class="p-4 md:p-6 bg-white border rounded-xl shadow hover:bg-gray-100 text-lg font-medium transition-all">Product 9</button>
-        <button class="p-4 md:p-6 bg-white border rounded-xl shadow hover:bg-gray-100 text-lg font-medium transition-all">Product 10</button>
+    <!-- Right Container (Product List) -->
+    <div class="bg-gradient-to-r from-white to-gray-100 shadow-xl rounded-3xl p-4 md:p-6 lg:p-8 border h-full">
+      <h2 class="text-lg md:text-xl font-semibold text-gray-700 mb-4 md:mb-6">Product List</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
+        <button *ngFor="let product of products"
+                class="p-3 md:p-4 bg-white border rounded-xl shadow hover:bg-gray-100 text-base md:text-lg font-medium transition-all"
+                (click)="openModal(product)">
+          {{ product.name }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Unit Input -->
+  <div *ngIf="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-4 md:p-6 rounded-xl shadow-lg w-full max-w-sm md:max-w-md">
+      <h2 class="text-xl md:text-2xl font-bold mb-3 md:mb-4">{{ selectedProduct?.name }}</h2>
+      <p class="text-base md:text-lg mb-1 md:mb-2">Price per Unit: {{ selectedProduct?.price | currency: 'PHP' }}</p>
+
+      <label for="units" class="block mb-1 md:mb-2 text-base md:text-lg">Enter Units:</label>
+      <input type="number" [(ngModel)]="inputKilogram" (input)="calculateTotal()" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+
+      <p class="text-2xl md:text-3xl font-extrabold text-blue-600 mt-3 md:mt-4">Total: {{ totalAmount | currency: 'PHP' }}</p>
+
+      <div class="flex justify-end mt-3 md:mt-4">
+        <button (click)="addProduct()" class="px-3 md:px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 mr-2">OK</button>
+        <button (click)="showModal = false" class="px-3 md:px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- summary modal -->
+  <div *ngIf="showSummary" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-4 md:p-6 rounded-xl shadow-lg w-full max-w-sm md:max-w-lg">
+      <h2 class="text-xl md:text-2xl font-bold mb-3 md:mb-4">Payment Summary</h2>
+      <form [formGroup]="jobOrderForm" class="space-y-3 md:space-y-4">
+        <label class="block">
+          <span class="text-base md:text-lg">Slip Number:</span>
+          <div class="flex items-center space-x-2">
+            <input type="checkbox" [(ngModel)]="autoGenerateSlipNumber" [ngModelOptions]="{standalone: true}" (change)="toggleSlipNumberGeneration()" class="form-checkbox h-5 w-5 text-blue-600">
+            <span class="text-sm md:text-base">Auto-generate slip number</span>
+          </div>
+          <input type="text" formControlName="slipNumber" [readonly]="autoGenerateSlipNumber" maxlength="8" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="SLIP-1234" />
+        </label>
+        <label class="block">
+          <span class="text-base md:text-lg">Customer Name:</span>
+          <input type="text" formControlName="customerName" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </label>
+        <label class="block">
+          <span class="text-base md:text-lg">Customer Contact:</span>
+          <input type="text" formControlName="customerContact" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </label>
+        <label class="block">
+          <span class="text-base md:text-lg">Total Amount:</span>
+          <p class="text-xl md:text-2xl font-bold text-blue-600">{{ getTotalAmount() | currency: 'PHP' }}</p>
+        </label>
+        <label class="block">
+          <span class="text-base md:text-lg">Payment Amount:</span>
+          <input type="number" formControlName="payment" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </label>
+        <div class="flex justify-center gap-3 mt-4">
+          <button type="button" (click)="confirmPayment()" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">Pay</button>
+          <button type="button" (click)="showSummary = false" class="px-4 py-2 bg-gray-300 text-black rounded-lg hover:bg-gray-400">Cancel</button>
+          <button type="button" class="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">Credit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- Receipt Modal -->
+  <div *ngIf="showReceipt" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-4 md:p-6 rounded-xl shadow-lg w-full max-w-sm md:max-w-lg">
+      <h2 class="text-xl md:text-2xl font-bold mb-3 md:mb-4">Receipt</h2>
+      <p class="text-base md:text-lg">Slip Number: {{ jobOrderForm.value.slipNumber }}</p>
+      <p class="text-base md:text-lg">Customer Name: {{ jobOrderForm.value.customerName }}</p>
+      <p class="text-base md:text-lg">Total Amount: {{ getTotalAmount() | currency: 'PHP' }}</p>
+      <p class="text-base md:text-lg">Payment: {{ jobOrderForm.value.payment | currency: 'PHP' }}</p>
+      <p class="text-base md:text-lg">Balance: {{ balance | currency: 'PHP' }}</p>
+      <p class="text-base md:text-lg font-bold">Status: Paid</p>
+      <div class="flex justify-end mt-3 md:mt-4">
+        <button (click)="goBack()" class="px-3 md:px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Done</button>
       </div>
     </div>
   </div>

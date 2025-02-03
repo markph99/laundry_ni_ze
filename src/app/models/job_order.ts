@@ -1,6 +1,6 @@
 export interface JobOrder {
   slipNumber: string;
-  customerName: string;  // Ensure this exists
+  customerName: string;
   customerContact: string;
   payment: number;
   products: Array<{
@@ -12,4 +12,7 @@ export interface JobOrder {
   totalAmount: number;
   orderStatus: string;
   orderDate: Date;
+  change?: number;
+  clothingType?: string;
+  kilograms?: number;
 }

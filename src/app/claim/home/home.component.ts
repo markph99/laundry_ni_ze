@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   jobOrders: JobOrder[] = [];
   paginatedJobOrders: JobOrder[] = [];
   filteredJobOrders: JobOrder[] = [];
-  clothingItems: Product[] = []; 
+  clothingItems: Product[] = [];
   currentPage: number = 1;
   itemsPerPage: number = 5;
   totalPages: number = 0;
@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.fetchJobOrders();
+    // this.fetchJobOrders();
     this.fetchClothingItems(); // ✅ Fetch clothing items when component loads
   }
 
@@ -43,26 +43,26 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  fetchJobOrders(): void {
-    this.jobOrderService.getJobOrders().subscribe({
-      next: (data) => {
-        this.jobOrders = data.map((job) => ({
-          ...job,
-          balance: Math.max((job.bill || 0) - (job.advancePayment || 0), 0),
-          change: (job.advancePayment || 0) > (job.bill || 0)
-            ? (job.advancePayment || 0) - (job.bill || 0)
-            : 0,
-          pickupTime: job.pickupTime ? this.formatTime(job.pickupTime) : 'N/A',
-        }));
-        this.filteredJobOrders = this.jobOrders;
-        this.totalPages = Math.ceil(this.filteredJobOrders.length / this.itemsPerPage);
-        this.updatePaginatedJobOrders();
-      },
-      error: (err) => {
-        console.error('Error fetching job orders:', err);
-      },
-    });
-  }
+  // fetchJobOrders(): void {
+  //   this.jobOrderService.getJobOrders().subscribe({
+  //     next: (data) => {
+  //       this.jobOrders = data.map((job) => ({
+  //         ...job,
+  //         balance: Math.max((job.bill || 0) - (job.advancePayment || 0), 0),
+  //         change: (job.advancePayment || 0) > (job.bill || 0)
+  //           ? (job.advancePayment || 0) - (job.bill || 0)
+  //           : 0,
+  //         pickupTime: job.pickupTime ? this.formatTime(job.pickupTime) : 'N/A',
+  //       }));
+  //       this.filteredJobOrders = this.jobOrders;
+  //       this.totalPages = Math.ceil(this.filteredJobOrders.length / this.itemsPerPage);
+  //       this.updatePaginatedJobOrders();
+  //     },
+  //     error: (err) => {
+  //       console.error('Error fetching job orders:', err);
+  //     },
+  //   });
+  // }
 
   formatTime(time: string): string {
     const [hours, minutes] = time.split(':').map(Number);

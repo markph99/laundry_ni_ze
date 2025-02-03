@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { userAuthGuard } from '../guards/user-auth.guard';
-import { JobOrderComponent } from './job-order/job-order.component';
 import { ClaimComponent } from './claim/claim.component';
 import { JobOrdComponent } from './job-ord/job-ord.component';
 

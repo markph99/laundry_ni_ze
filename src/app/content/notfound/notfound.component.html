@@ -1,0 +1,18 @@
+<div class="min-h-screen flex items-center justify-center">
+  <div class="text-center p-12 bg-white bg-opacity-10 backdrop-blur-lg shadow-2xl rounded-3xl max-w-lg transform hover:scale-105 transition-transform duration-300 border border-white border-opacity-20">
+    <div class="flex items-center justify-center mb-8">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 text-red-400 animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2" fill="none" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h8m-4-4v8" />
+      </svg>
+    </div>
+    <h1 class="text-6xl font-extrabold text-white mb-4 drop-shadow-lg">404</h1>
+    <h2 class="text-3xl font-semibold text-gray-200 mb-4">Oops! Page Not Found</h2>
+    <p class="text-gray-300 mb-8 leading-relaxed">It seems the page you’re looking for doesn’t exist. It might have been moved or deleted.</p>
+    <button
+      class="px-10 py-4 bg-indigo-500 text-white rounded-full shadow-xl hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300 transition duration-300 transform hover:-translate-y-1 hover:shadow-2xl"
+      (click)="goHome()">
+      Take Me Home
+    </button>
+  </div>
+</div>

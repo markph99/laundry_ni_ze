@@ -1,0 +1,100 @@
+<!-- Full-page background & center container -->
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-b from-sky-300 to-blue-600 p-4">
+  <!-- Form Container -->
+  <div class="w-full max-w-screen-md bg-white rounded-lg shadow-md p-6">
+
+    <!-- Logo & Title -->
+    <div class="flex flex-col items-center mb-6">
+      <img src="./laundry_logo.png" alt="Laundry Logo" class="w-24 h-auto mb-2" />
+    </div>
+
+    <form class="grid grid-cols-1 md:grid-cols-2 gap-6" (ngSubmit)="submitJobOrder()">
+
+      <!-- Slip Number -->
+      <div>
+        <label for="slip_number" class="block mb-1 font-semibold text-gray-700">Slip Number</label>
+        <input type="number" id="slip_number" name="slipNumber" placeholder="Enter a Slip Number"
+          [(ngModel)]="formData.slipNumber"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+
+      <!-- Clothing Type (Dynamic from Database) -->
+      <div>
+        <label for="clothingType" class="block mb-1 font-semibold text-gray-700">
+          Clothing Type
+        </label>
+        <select id="clothingType" name="clothingType" [(ngModel)]="formData.clothingType"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="" disabled>Select clothing type</option>
+          <option *ngFor="let item of clothingItems" [value]="item.name">
+            {{ item.name }} - ₱{{ item.price }}
+          </option>
+        </select>
+      </div>
+
+
+      <!-- Kilograms (NEW) -->
+      <div>
+        <label for="kilograms" class="block mb-1 font-semibold text-gray-700">Weight (kg)</label>
+        <input type="number" id="kilograms" name="kilograms" placeholder="Enter weight in kg" min="0.1" step="0.1"
+          [(ngModel)]="formData.kilograms"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+
+      <!-- Pickup Date -->
+      <div>
+        <label for="date" class="block mb-1 font-semibold text-gray-700">Pickup Date</label>
+        <input type="date" id="date" name="pickupDate" [(ngModel)]="formData.pickupDate"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+
+      <!-- Pickup Time -->
+      <div>
+        <label for="time" class="block mb-1 font-semibold text-gray-700">Pickup Time</label>
+        <input type="time" id="time" name="pickupTime" [(ngModel)]="formData.pickupTime"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+
+      <!-- Bill -->
+      <div>
+        <label for="bill" class="block mb-1 font-semibold text-gray-700">Bill (₱)</label>
+        <input type="number" id="bill" name="bill" placeholder="Total Bill Amount" [(ngModel)]="formData.bill"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+
+      <!-- Advance Payment -->
+      <div>
+        <label for="advance_payment" class="block mb-1 font-semibold text-gray-700">Advance Payment (₱)</label>
+        <input type="number" id="advance_payment" name="advancePayment" placeholder="Amount Paid in Advance"
+          [(ngModel)]="formData.advancePayment"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+
+      <!-- Additional Instructions -->
+      <div class="md:col-span-2">
+        <label for="instructions" class="block mb-1 font-semibold text-gray-700">Additional Instructions</label>
+        <textarea id="instructions" name="additionalInstructions" rows="3"
+          placeholder="Enter any special requests here..." [(ngModel)]="formData.additionalInstructions"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+      </div>
+
+      <!-- Buttons Row -->
+      <div
+        class="md:col-span-2 flex flex-col sm:flex-row justify-end items-center space-y-2 sm:space-y-0 sm:space-x-4 pt-2">
+        <!-- Back Button -->
+        <button type="button"
+          class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold px-4 py-2 rounded shadow-sm transition focus:outline-none focus:ring-2 focus:ring-gray-300"
+          (click)="onBack()">
+          Back
+        </button>
+
+        <!-- Submit Button -->
+        <button type="submit"
+          class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
+          Submit
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { JobOrder } from '../models/job-order';
 
@@ -7,7 +7,7 @@ import { JobOrder } from '../models/job-order';
   providedIn: 'root',
 })
 export class JobOrderService {
-  private apiUrl = 'http://localhost:3000/api/job_order';
+  private apiUrl = 'http://localhost:3000/api/job_orders';
 
 
   constructor(private http: HttpClient) {}
@@ -19,6 +19,9 @@ export class JobOrderService {
 
   // Add a new job order
   addJobOrder(data: JobOrder): Observable<JobOrder> {
-    return this.http.post<JobOrder>(this.apiUrl, data);
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.post<JobOrder>(this.apiUrl, data, { headers });
   }
 }

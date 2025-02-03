@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { ContentRoutingModule } from './content/content-routing.module';
+import { NotfoundComponent } from './content/notfound/notfound.component';
 
 export const routes: Routes = [
   {
@@ -14,4 +15,8 @@ export const routes: Routes = [
     path: 'claim',
     loadChildren: () => import('./claim/claim-routing.module').then((m) =>m.ClaimRoutingModule)
   },
+  {
+    path: '**',
+    component: NotfoundComponent
+  }
 ];

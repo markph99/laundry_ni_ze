@@ -26,7 +26,7 @@ export class LoginComponent {
   ) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required]],
     });
   }
 
@@ -42,7 +42,7 @@ export class LoginComponent {
           // Redirect user if they are a branch user and have a branch assigned
           if (response.user.role === 'branchUser' && response.user.branch) {
             // If it's a branch user, redirect them to job orders page (branch-specific)
-            this.router.navigate([`/job-order/${response.user.branch._id}`]);
+            this.router.navigate([`/job_order`]);
           } else {
             alert('Login failed. Only branch users are allowed.');
             this.router.navigate(['/login']); // Optionally redirect to login page
